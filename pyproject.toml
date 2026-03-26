@@ -1,0 +1,66 @@
+[tool.poetry]
+name = "multi-llm-provider"
+version = "0.1.0"
+description = "Unified multi-provider LLM interface supporting Claude, OpenAI, Mistral, Ollama, and Clipboard"
+authors = ["Stephane Jouve <stephanejouve@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/stephanejouve/multi-llm-provider"
+repository = "https://github.com/stephanejouve/multi-llm-provider"
+keywords = ["llm", "ai", "claude", "openai", "mistral", "ollama"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+packages = [{include = "multi_llm_provider", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
+
+[tool.poetry.extras]
+claude = ["anthropic"]
+openai = ["openai"]
+mistral = ["mistralai"]
+ollama = ["requests"]
+all = ["anthropic", "openai", "mistralai", "requests"]
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=7.0"
+pytest-cov = ">=4.0"
+black = ">=24.0"
+ruff = ">=0.4"
+isort = ">=5.12"
+
+[tool.poetry.group.extras.dependencies]
+anthropic = ">=0.75"
+openai = ">=2.14"
+mistralai = ">=1.10"
+requests = ">=2.31"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
